@@ -16,7 +16,7 @@ interface is needed; this tool is easy enough to use to improve your workflow.
 ## Install with cURL
 
 ```console
-$ curl -sSL https://github.com/chrismipi/todo-cli/master/install.sh | bash
+$ curl -sSL https://github.com/chrismipi/todo-cli/raw/master/install.sh | bash
 ```
 
 ## Usage

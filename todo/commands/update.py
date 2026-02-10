@@ -29,16 +29,6 @@ class UpdateCommand(Command):
             sys.exit(1)
 
         try:
-            # Navigate to the source directory and pull the latest changes
-            print(f"{{info}}Pulling latest changes from master branch...{{reset}}")
-            subprocess.run(
-                ["git", "pull", "origin", "master"],
-                cwd=source_dir,
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-
             # Re-run the install script to build and install the new version
             print(f"{{info}}Re-running installation script...{{reset}}")
             result = subprocess.run(
