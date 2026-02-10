@@ -8,14 +8,15 @@
 
 ## Elevator Pitch
 
-*Todo* exists to bring all the needed functionalities for simple project management to the terminal. No graphical interface is needed; this tool is easy enough to use to improve your workflow.
+*Todo* exists to bring all the needed functionalities for simple project management to the terminal. No graphical
+interface is needed; this tool is easy enough to use to improve your workflow.
 
 ![Todo screenshot](https://cloud.githubusercontent.com/assets/6137112/15632931/d48ba286-25a0-11e6-983b-46ef5188e91e.png)
 
 ## Install with cURL
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/francoischalifour/todo-cli/master/install.sh | bash
+$ curl -sSL https://github.com/chrismipi/todo-cli/master/install.sh | bash
 ```
 
 ## Usage
@@ -47,6 +48,24 @@ $ pip install <path to the todo-cli folder>
 ```
 
 You should now be able to use the command `todo`.
+
+## Build Standalone Executable
+
+To create a standalone executable that doesn't require Python to be installed, you can use PyInstaller.
+
+### Install PyInstaller
+
+```console
+$ pip install pyinstaller
+```
+
+### Build the executable
+
+```console
+$ pyinstaller --onefile --name todo todo/__main__.py
+```
+
+The executable will be created in the `dist` directory.
 
 ### Create a Todo project
 
