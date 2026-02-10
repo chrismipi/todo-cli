@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+import os
 import subprocess
 import sys
 
@@ -10,49 +11,63 @@ from todo.utils.styles import Fore, Style
 class UpdateCommand(Command):
     def run(self):
         """
-        Updates the application by fetching and running the latest install script.
+        Updates the application by pulling the latest changes and re-running the install script.
         """
         print('{info}Updating todo-cli...{reset}'.format(
             info=Fore.INFO,
             reset=Style.RESET_ALL,
         ))
 
-        try:
-            # The command to download and run the installer script
-            install_command = "curl -sSL https://github.com/chrismipi/todo-cli/master/install.sh | bash"
+        source_dir = os.path.expanduser("~/.todo-cli-source")
+        install_script = os.path.join(source_dir, "install.sh")
 
-            # We use subprocess.run to execute the command.
-            # We capture the output to show it only if there's an error.
-            result = subprocess.run(install_command, shell=True, check=True, capture_output=True, text=True)
+        if not os.path.isdir(source_dir):
+            print(
+                '{fail}Source directory not found at {dir}. Please reinstall.{reset}'
+                .format(fail=Fore.FAIL, dir=source_dir, reset=Style.RESET_ALL)
+            )
+            sys.exit(1)
+
+        try:
+            # Navigate to the source directory and pull the latest changes
+            print(f"{{info}}Pulling latest changes from master branch...{{reset}}")
+            subprocess.run(
+                ["git", "pull", "origin", "master"],
+                cwd=source_dir,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            # Re-run the install script to build and install the new version
+            print(f"{{info}}Re-running installation script...{{reset}}")
+            result = subprocess.run(
+                ["bash", install_script],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
 
             print('{success}Update successful!{reset}'.format(
                 success=Fore.SUCCESS,
                 reset=Style.RESET_ALL,
             ))
-            # The script will replace the current executable, so we exit.
             sys.exit(0)
 
         except subprocess.CalledProcessError as e:
             print(
                 '{fail}Update failed. Please try again later or update manually.{reset}'
-                .format(
-                    fail=Fore.FAIL,
-                    reset=Style.RESET_ALL,
-                )
+                .format(fail=Fore.FAIL, reset=Style.RESET_ALL)
             )
-            print("\n--- Installer Output ---")
+            print("\n--- Error Details ---")
             print(e.stdout)
             print(e.stderr)
-            print("------------------------")
+            print("-----------------------")
             sys.exit(1)
         except Exception as e:
             print(
                 '{fail}An unexpected error occurred: {error}{reset}'
-                .format(
-                    fail=Fore.FAIL,
-                    error=e,
-                    reset=Style.RESET_ALL,
-                )
+                .format(fail=Fore.FAIL, error=e, reset=Style.RESET_ALL)
             )
             sys.exit(1)
 
