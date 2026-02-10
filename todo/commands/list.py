@@ -2,9 +2,8 @@
 
 from __future__ import absolute_import
 
-import os
-import sys
 import json
+import sys
 
 from todo.commands.base import Command
 from todo.utils.compatibility import safe_print
@@ -46,7 +45,6 @@ class ListCommand(Command):
                 )
             )
 
-
     def print_list(self, todos=[]):
         """Prints the entire todo list with information"""
         if not todos:
@@ -62,7 +60,7 @@ class ListCommand(Command):
             self.print_todos(todos)
 
             no_items = len(todos)
-            no_checked = len([t for t in todos if t['done'] ])
+            no_checked = len([t for t in todos if t['done']])
             print(
                 '{info}{no_items:>2} items: {no_checked} completed, {no_unchecked} left{reset}'
                 .format(
@@ -73,7 +71,6 @@ class ListCommand(Command):
                     reset=Style.RESET_ALL,
                 )
             )
-
 
     def run(self):
         try:
@@ -92,11 +89,15 @@ class ListCommand(Command):
             )
             sys.exit(1)
 
-        try: name = data['name']
-        except: name = self.UNTITLED_NAME
+        try:
+            name = data['name']
+        except:
+            name = self.UNTITLED_NAME
 
-        try: todos = data['todos']
-        except: todos = []
+        try:
+            todos = data['todos']
+        except:
+            todos = []
 
         self.print_project_name(name)
         self.print_list(todos)

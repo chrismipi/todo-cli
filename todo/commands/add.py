@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
-import os
-import sys
 import json
+import sys
 
 from todo.commands.base import Command
 from todo.utils.styles import Fore, Style
@@ -14,11 +13,10 @@ class AddCommand(Command):
         new_todos = todos.copy()
 
         for item in self.get_titles_input():
-            new_item = { "done": False, "title": item }
+            new_item = {"done": False, "title": item}
             new_todos.append(new_item)
 
         return new_todos
-
 
     def run(self):
         try:
@@ -38,11 +36,15 @@ class AddCommand(Command):
             )
             sys.exit(1)
 
-        try: name = data['name']
-        except: name = self.UNTITLED_NAME
+        try:
+            name = data['name']
+        except:
+            name = self.UNTITLED_NAME
 
-        try: todos = data['todos']
-        except: todos = []
+        try:
+            todos = data['todos']
+        except:
+            todos = []
 
         new_data = {
             'name': name,

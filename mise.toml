@@ -1,0 +1,26 @@
+# mise configuration file
+# See https://mise.jdx.dev/ for more information
+
+[tools]
+# Specifies the Python version for the project.
+# `mise install python@3.11` will install it if not present.
+python = "3.11"
+
+[env]
+# This tells mise to automatically create and manage a virtual environment
+# in a `.venv` directory within the project.
+MISE_PYTHON_VENV = ".venv"
+
+[tasks]
+# Defines custom commands for the project, runnable with `mise run <task_name>`.
+
+# Task to set up the development environment.
+# It installs the project in "editable" mode, so code changes are reflected instantly.
+setup = "pip install -e ."
+
+# A simple alias to run the application's main entry point.
+# Example: `mise run start -- --help`
+start = "todo"
+
+# You can add other tasks here, e.g., for running tests:
+# test = "pytest"

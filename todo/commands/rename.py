@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
-import os
-import sys
 import json
+import sys
 
 from todo.commands.base import Command
 from todo.utils.styles import Fore, Style
@@ -26,7 +25,6 @@ class RenameCommand(Command):
                 )
             )
             sys.exit()
-
 
     def run(self):
         try:

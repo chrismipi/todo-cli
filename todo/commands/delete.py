@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 import os
 import sys
-import json
 
 from todo.commands.base import Command
 from todo.utils.styles import Fore, Style
@@ -28,7 +27,6 @@ class DeleteCommand(Command):
         if answer.startswith('n'):
             sys.exit()
 
-
     def delete_project(self):
         """Deletes the existing project"""
         try:
@@ -51,7 +49,6 @@ class DeleteCommand(Command):
                 )
             )
             sys.exit()
-
 
     def run(self):
         name = self.get_project_name()

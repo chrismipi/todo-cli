@@ -2,12 +2,11 @@
 
 from __future__ import absolute_import
 
-import os
-import sys
 import json
+import sys
 
 from todo.commands.list import ListCommand
-from todo.utils.styles import Fore, Back, Style
+from todo.utils.styles import Fore, Style
 
 
 class SearchCommand(ListCommand):
@@ -16,8 +15,7 @@ class SearchCommand(ListCommand):
         if not search:
             return None
         search_lower = search.lower()
-        return [ todo for todo in todos if search_lower in todo['title'].lower() ]
-
+        return [todo for todo in todos if search_lower in todo['title'].lower()]
 
     def print_results(self, todos=[]):
         """Prints the result of the query"""
@@ -44,7 +42,6 @@ class SearchCommand(ListCommand):
                 )
             )
 
-
     def run(self):
         try:
             with open(self.PROJECT_FILE, 'r') as project_file:
@@ -61,8 +58,10 @@ class SearchCommand(ListCommand):
             )
             sys.exit(1)
 
-        try: todos = data['todos']
-        except: todos = []
+        try:
+            todos = data['todos']
+        except:
+            todos = []
 
         todos_found = self.get_matches(self.get_command_attributes(), todos)
 

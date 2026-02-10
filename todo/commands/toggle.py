@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
-import os
-import sys
 import json
+import sys
 
 from todo.commands.base import Command
 from todo.utils.menu import show_options
@@ -14,14 +13,12 @@ class ToggleCommand(Command):
         """Returns the subtitle of the menu"""
         return 'Toggle items'
 
-
     def check_by_item(self, item):
         """Returns a toggled copy of the item"""
         item_toggled = item.copy()
         status = item['done']
         item_toggled['done'] = not status
         return item_toggled
-
 
     def handle_click(self, todos, item_index):
         """Returns a copy of the todos with the toggled item clicked
@@ -31,7 +28,6 @@ class ToggleCommand(Command):
         todos_toggled[item_index] = self.check_by_item(item_to_toggle)
         return todos_toggled
 
-
     def handle_search(self, todos, item):
         """Returns a copy of the todos with the toggled item found
         Function called when the item title has been typed in the command line"""
@@ -40,7 +36,6 @@ class ToggleCommand(Command):
         item_to_toggle = todos_toggled[item_index]
         todos_toggled[item_index] = self.check_by_item(item_to_toggle)
         return todos_toggled
-
 
     def open_list(self, data, name):
         """Opens the interactive menu to toggle the items"""
@@ -57,7 +52,6 @@ class ToggleCommand(Command):
         except KeyboardInterrupt:
             self.cancel_command()
 
-
     def update_todos(self, data):
         """Returns the new todo list with the toggled items typed by the user
         Function called when the user types the items' names"""
@@ -70,13 +64,13 @@ class ToggleCommand(Command):
             for item in todos:
                 todos = self.handle_search(todos, item)
         else:
-            items_matching = [ item for item in todos if item['title'] in items_titles ]
+            items_matching = [item for item in todos if item['title'] in items_titles]
             if items_matching:
                 for item_found in items_matching:
                     todos = self.handle_search(todos, item_found)
 
-            titles_matching = [ item['title'] for item in items_matching ]
-            items_not_found = [ item for item in items_titles if item not in titles_matching ]
+            titles_matching = [item['title'] for item in items_matching]
+            items_not_found = [item for item in items_titles if item not in titles_matching]
             if items_not_found:
                 print(
                     '{info}Unknown {items_print}: {items}{reset}'
@@ -92,7 +86,6 @@ class ToggleCommand(Command):
                 sys.exit()
 
         return todos
-
 
     def run(self):
         try:
@@ -110,8 +103,10 @@ class ToggleCommand(Command):
             )
             sys.exit(1)
 
-        try: name = data['name']
-        except: name = self.UNTITLED_NAME
+        try:
+            name = data['name']
+        except:
+            name = self.UNTITLED_NAME
 
         try:
             if self.get_command_attributes():

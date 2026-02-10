@@ -1,33 +1,13 @@
 {
-    "name": "todo",
+    "name": "VSS",
     "todos": [
         {
-            "done": true,
-            "title": "List"
-        },
-        {
-            "done": true,
-            "title": "Remove"
-        },
-        {
-            "done": true,
-            "title": "Toggle"
-        },
-        {
-            "done": true,
-            "title": "Menu interface"
-        },
-        {
-            "done": true,
-            "title": "Make executable"
+            "done": false,
+            "title": "Setup a project"
         },
         {
             "done": false,
-            "title": "Add parser"
-        },
-        {
-            "done": false,
-            "title": "Flag management"
+            "title": "Setup something else"
         }
     ]
 }

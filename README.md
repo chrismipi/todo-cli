@@ -12,6 +12,12 @@
 
 ![Todo screenshot](https://cloud.githubusercontent.com/assets/6137112/15632931/d48ba286-25a0-11e6-983b-46ef5188e91e.png)
 
+## Install with cURL
+
+```console
+$ curl -sSL https://raw.githubusercontent.com/francoischalifour/todo-cli/master/install.sh | bash
+```
+
 ## Usage
 
 ### Clone the repo
