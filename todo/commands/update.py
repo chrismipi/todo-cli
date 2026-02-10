@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-import os
 import subprocess
 import sys
 
@@ -20,7 +19,7 @@ class UpdateCommand(Command):
 
         try:
             # The command to download and run the installer script
-            install_command = "curl -sSL https://raw.githubusercontent.com/francoischalifour/todo-cli/master/install.sh | bash"
+            install_command = "curl -sSL https://github.com/chrismipi/todo-cli/master/install.sh | bash"
 
             # We use subprocess.run to execute the command.
             # We capture the output to show it only if there's an error.
